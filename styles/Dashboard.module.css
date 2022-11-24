@@ -1,0 +1,7 @@
+.container {
+    @apply w-full min-h-screen flex flex-col items-center;
+}
+
+.topbar{
+    @apply w-[95%] rounded mt-4 bg-slate-200 px-2 flex  items-center justify-center text-6xl tracking-tighter font-semibold py-4;
+}

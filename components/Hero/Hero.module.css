@@ -1,0 +1,19 @@
+.container{
+    @apply h-full flex flex-col items-center p-4 ;
+ }
+
+ .title{
+    @apply text-white font-bold text-7xl mb-4; 
+ }
+
+ .links{
+   @apply w-full flex justify-evenly ;
+ }
+
+ .register{
+   @apply text-white font-semibold  border border-gray-700 p-2;
+ }
+
+ .login{
+   @apply text-white font-semibold border border-gray-700 p-2;
+ }
