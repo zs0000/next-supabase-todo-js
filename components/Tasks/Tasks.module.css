@@ -1,0 +1,15 @@
+.container {
+    @apply w-full bg-white bg-opacity-20 p-4 rounded-lg border border-gray-600;
+}
+
+.taskscontainer{
+@apply flex flex-col space-y-2;
+}
+
+.labelcontainer {
+    @apply w-full text-lg text-slate-50 font-light pb-4;
+}
+
+.label{
+    @apply pl-2;
+}

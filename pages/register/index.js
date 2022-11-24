@@ -1,15 +1,19 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout"
 import s from "../../styles/Register.module.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { supabase } from "../../utils/supabaseClient";
+import { useRouter } from "next/router";
 export default function Register() {
     const notify = () => toast("Check your inbox to verify your email!")
     const notifyError = () => toast("Error Signing up/User might already exist")
+    const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const [session, setSession] = useState(null)
     const handleRegisterUser = async(e) => {
         try {
             setLoading(true)
@@ -35,6 +39,46 @@ export default function Register() {
             setLoading(false)
         }
     }
+    useEffect(() => {
+        let mounted = true
+    
+        async function getInitialSession() {
+          const {
+            data: { session },
+          } = await supabase.auth.getSession()
+    
+          // only update the react state if the component is still mounted
+          if (mounted) {
+            if (session) {
+              setSession(session)
+            }
+    
+            setLoading(false)
+          }
+        }
+    
+        getInitialSession()
+    
+        const { subscription } = supabase.auth.onAuthStateChange(
+          (_event, session) => {
+            setSession(session)
+          }
+        )
+    
+        return () => {
+          mounted = false
+    
+          subscription?.unsubscribe()
+        }
+      }, [])
+  
+      if(session){
+ 
+              router.push('/dashboard')
+          
+      }
+  
+    
 
   return (
     <Layout>

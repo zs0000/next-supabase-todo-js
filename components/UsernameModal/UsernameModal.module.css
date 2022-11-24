@@ -1,0 +1,31 @@
+.container {
+    @apply w-full h-full min-h-screen flex flex-col items-center justify-center fixed ;
+}
+
+.form{
+    @apply w-[80%] p-4 flex flex-col items-center justify-center space-y-2;
+}
+
+.inputbox {
+    @apply w-full  h-[40px] flex flex-col items-center;
+}
+
+.input {
+    @apply h-full bg-gray-600 hover:bg-gray-100 outline-none rounded-lg p-2;
+}
+
+.buttoncontainer{
+    @apply w-full flex flex-col items-center justify-center space-y-2;
+}
+.button{
+    @apply p-2 px-4 rounded-lg text-center bg-slate-200 hover:bg-slate-600 hover:transform duration-300 hover:text-slate-200;
+}
+
+.labelcontainer{
+    @apply w-full flex justify-center pb-10;
+}
+
+.label {
+    @apply text-white tracking-tighter ;
+    
+}
