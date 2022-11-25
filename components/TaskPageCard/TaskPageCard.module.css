@@ -1,0 +1,40 @@
+.card{
+    @apply w-[95%] bg-white bg-opacity-10 rounded border border-gray-600 p-4 flex flex-row ;
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.statuscontainer {
+    @apply w-[10%] mr-2 flex flex-row space-x-1 items-center text-xs text-slate-400;
+}
+
+.primarycontainer{
+    @apply w-full h-full;
+}
+
+.title{
+    @apply font-bold tracking-tighter text-2xl text-white;
+}
+
+.incomplete{
+    @apply  bg-red-500 rounded-full w-[12px] h-[12px];
+}
+
+.inprogress{
+    @apply bg-yellow-500 rounded-full w-[12px] h-[12px];
+}
+
+.complete{
+    @apply bg-green-500 rounded-full w-[12px] h-[12px];
+    
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}

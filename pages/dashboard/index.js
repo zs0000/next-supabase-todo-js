@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import HelloBanner from "../../components/HelloBanner/HelloBanner"
 import Layout from "../../components/Layout/Layout"
 import TaskInput from "../../components/TaskInput/TaskInput"
@@ -8,15 +8,14 @@ import s from "../../styles/Dashboard.module.css"
 import { supabase } from "../../utils/supabaseClient"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { TaskContext } from "../../context/TasksContext"
 export default function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
     const [session, setSession] = useState(null)
     const [username, setUsername] = useState('')
     const [userID, setUserID] = useState(null)
     const [message, setMessage] = useState("Hello");
-    const [tasks, setTasks] = useState([
-     
-  ]);
+    const {tasks, setTasks} = useContext(TaskContext)
     const [modal, setModal] = useState(<></>);
 
     const closeModal = () => setModal(<></>);

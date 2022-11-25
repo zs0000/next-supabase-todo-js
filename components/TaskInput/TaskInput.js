@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { supabase } from "../../utils/supabaseClient";
 import s from "./TaskInput.module.css"
 import useCreateTask from "../../hooks/useCreateTask";
+import { TaskContext } from "../../context/TasksContext";
 export default function TaskInput({userID}) {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('')
     const [status, setStatus] = useState('Status');
+    const {tasks, setTasks} = useContext(TaskContext)
     const current = new Date();
     const notifyCreatedTask = () => toast('Task created successfully')
     const notifyErrorCreatingTask = () => toast('Task creation returned an error!')
@@ -18,9 +20,7 @@ export default function TaskInput({userID}) {
         status:status
     })
 
-    if(createTaskMutation.isSuccess){
-        notifyCreatedTask()
-    }
+
 
     const handleCreateTask = async(e) =>{
         e.preventDefault()
@@ -40,7 +40,7 @@ export default function TaskInput({userID}) {
                 text:description,
                 creator_id: userID,
                 status:status})
-               
+              
 
             if(data){
                 console.log(data)
@@ -90,7 +90,16 @@ export default function TaskInput({userID}) {
             </select>
             </div>
             <div className={s.buttoncontainer}>
-                <button className={s.button} onClick={()=> createTaskMutation.mutate()}>
+                <button className={s.button} onClick={()=> {createTaskMutation.mutate()
+                setTasks([...tasks, { 
+                    title: title,
+                    text:description,
+                    status:status}])
+                    notifyCreatedTask()
+                    setTitle("")
+                    setDescription("")
+                    setStatus("")
+                    }}>
                     Submit
                 </button>
             </div>

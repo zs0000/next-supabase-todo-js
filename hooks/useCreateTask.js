@@ -1,12 +1,14 @@
+
 import {useMutation, useQueryClient} from 'react-query'
 import { supabase } from '../utils/supabaseClient'
+
 
 const createTask = async (task)=>{
     console.log(task)
     const{data,error} = await supabase
     .from('tasks')
     .insert(task)
-
+    
     if(error){
         throw error
     }

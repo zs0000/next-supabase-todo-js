@@ -1,51 +1,74 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { TaskContext } from "../../context/TasksContext";
+import { supabase } from "../../utils/supabaseClient";
 import TaskCard from "../TaskCard/TaskCard";
 import s from "./Tasks.module.css"
 
 export default function Tasks({tasks, setTasks}) {
-
-
-    if(!tasks || tasks.length == 0){
-        setTasks( [{
-            id:1,
-            title: 'Incomplete Task #1',
-            status: 'incomplete'
-        },
-        {
-            id:2,
-            title: 'Task #2 (in progress)',
-            status: 'in progress'
-        },
-        {
-            id:3,
-            title: 'Complete Task #3',
-            status: 'complete'
-        }])
-        return(
-            <div className={s.container}>
-        <div className={s.labelcontainer}>
-            <span className={s.label}>
-                Tasks
-            </span>
-        </div>
-        <div className={s.taskscontainer}>
-       Nothing to see yet!
-        </div>
-    </div>
-        )
+    const {tasksToDelete, setTasksToDelete} = useContext(TaskContext)
+    const notify = () => toast('Successfully deleted task(s)!')
+    const notifyError = () => toast('Successfully deleted task(s)!')
+   
+   const tempArr = [];
+   const constructBatchDeleteRequests = async() =>{
+    try {
+        for(const atask of tasksToDelete){
+            let holder = `'id', ${atask} ,`;
+            tempArr.push(holder);
+        }
+    } catch (err) {
+        console.error(err.message)
     }
+    
+    return tempArr.join('')
+   }
+
+   const handleBatchDelete = async(e) =>{
+    e.preventDefault()
+    try {
+        const completeReqString = await constructBatchDeleteRequests()
+        console.log(completeReqString)
+       for(const atask of tasksToDelete){
+        const {data, error} = await supabase
+        .from('tasks')
+        .delete()
+        .eq('id', atask)
+        notify()
+        setTasks(tasks.filter(task => task.id !== atask))
+
+
+        if(error){
+            console.log(error)
+            notifyError()
+        }
+       }
+    } catch (err) {
+        console.error(err.message)
+    }
+   }
+   if(!tasks){
+    return<></>
+   }
+   
   return (
     <div className={s.container}>
         <div className={s.labelcontainer}>
             <span className={s.label}>
                 Tasks
             </span>
+           <div className={s.buttoncontainer}>
+           <button onClick={(e)=>handleBatchDelete(e)} className={s.button}>
+                {tasksToDelete.length >1 ? 'Delete Batch' : 'Delete Task'}
+            </button>
+           </div>
         </div>
         <div className={s.taskscontainer}>
         {tasks.map((task)=>(
             <TaskCard
             id={task.id}
+            key={task.id}
             title={task.title}
             status={task.status} />
         ))}

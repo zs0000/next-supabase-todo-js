@@ -1,5 +1,5 @@
 .container {
-    @apply w-full bg-white bg-opacity-20 p-4 rounded-lg border border-gray-600;
+    @apply w-full bg-white bg-opacity-20 p-4 rounded-lg border border-gray-600 ;
 }
 
 .taskscontainer{
