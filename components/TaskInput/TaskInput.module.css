@@ -1,9 +1,9 @@
 .container {
-    @apply w-full h-full flex flex-row items-center justify-center;
+    @apply w-full h-[175px] flex flex-row items-center justify-center;
 }
 
 .form{
-    @apply w-[80%] p-4 flex flex-col items-center justify-center space-y-2;
+    @apply w-full p-4 flex flex-col items-center justify-center space-y-2;
 }
 
 .inputbox {
@@ -11,7 +11,16 @@
 }
 
 .input {
-    @apply h-full bg-gray-600 bg-opacity-10 hover:bg-gray-700 outline-none rounded-lg p-2;
+    @apply h-full w-full bg-gray-600 bg-opacity-10 hover:bg-gray-700 outline-none rounded-lg p-2;
+}
+.largeinputbox {
+    @apply w-full h-[100px];
+
+}
+
+.largeinput {
+    @apply h-full w-full bg-gray-600 bg-opacity-10 resize-none hover:bg-gray-700 outline-none rounded-lg p-2;
+    scrollbar-width: none;
 }
 .selectinput {
     @apply h-full  bg-gray-600 bg-opacity-10 text-slate-300 hover:bg-gray-700 outline-none rounded-lg p-2;
@@ -19,13 +28,13 @@
 
 
 .buttoncontainer{
-    @apply w-full flex flex-col items-center justify-center space-y-2;
+    @apply w-full flex h-[100px] flex-col items-center justify-center space-y-2;
 }
 .button{
-    @apply w-full py-1 text-slate-400 rounded-lg text-center bg-slate-700 hover:bg-slate-600 hover:transform duration-300 hover:text-slate-200;
+    @apply w-full h-full  text-slate-400 rounded-lg text-center bg-slate-700 hover:bg-slate-600 hover:transform duration-300 hover:text-slate-200;
 }
 
 
 .sidecontainer {
-    @apply flex flex-col items-center justify-center space-y-2 ;
+    @apply flex flex-col h-full w-[150px] items-center justify-center space-y-2 pr-4 ;
 }

@@ -1,5 +1,5 @@
 .container {
-    @apply w-full bg-white bg-opacity-20 p-4 rounded-lg border border-gray-600 ;
+    @apply w-full bg-white bg-opacity-10 p-4 rounded-lg border border-zinc-700 ;
 }
 
 .taskscontainer{
@@ -7,9 +7,25 @@
 }
 
 .labelcontainer {
-    @apply w-full text-lg text-slate-50 font-light pb-4;
+    @apply w-full text-lg flex flex-row text-slate-50 font-light pb-4;
 }
 
 .label{
     @apply pl-2;
+}
+
+.label{
+    @apply w-[50%];
+}
+
+.buttoncontainer{
+    @apply w-[50%] flex justify-end;
+}
+
+.button{
+    @apply tracking-tighter text-xs px-4 py-1 bg-red-900 transform duration-300;
+}
+
+.button:disabled{
+    @apply bg-gray-700 bg-opacity-20;
 }

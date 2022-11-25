@@ -9,8 +9,11 @@ import { supabase } from "../../utils/supabaseClient"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TaskContext } from "../../context/TasksContext"
+import LoadingBanner from "../../components/LoadingBanner/LoadingBanner"
+import Link from "next/link"
 export default function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
+    const [loadingBanner, setLoadingBanner] = useState(true)
     const [session, setSession] = useState(null)
     const [username, setUsername] = useState('')
     const [userID, setUserID] = useState(null)
@@ -18,9 +21,21 @@ export default function Dashboard() {
     const {tasks, setTasks} = useContext(TaskContext)
     const [modal, setModal] = useState(<></>);
 
+    const notifySignedOut = () => toast("Successfully signed out")
+    const notifySignedOutError = () => toast("Error signing out")
+    
     const closeModal = () => setModal(<></>);
     const openModal = () => setModal(<UsernameModal closeModal={closeModal} session={session} />);
-  
+    const handleSignOut = async(e) => {
+      e.preventDefault()
+      try {
+       const {error} = await supabase.auth.signOut()
+        notifySignedOut()
+      } catch (err) {
+        notifySignedOutError()
+        console.error(err.message)
+      }
+    }
     useEffect(() => {
       let mounted = true
   
@@ -86,6 +101,7 @@ export default function Dashboard() {
         if(data){
           console.log(data)
           setUsername(data.username)
+          setLoadingBanner(false)
         }
         if(error){
           console.log(error)
@@ -124,13 +140,22 @@ export default function Dashboard() {
         return(
             <Layout>
                 <div className={s.container}>
-                <HelloBanner
+               <div className={s.topbar}> <HelloBanner
        message={"Sign in to view Dashboard"}
        username={""}
      
 
-       />
+       /></div>
+       <div className={s.links}>
+            <Link href="/register" className={s.register}>
+                Sign up
+            </Link>
+            <Link href="/login" className={s.login}>
+                Sign in
+            </Link>
             </div>
+            </div>
+            
             </Layout>
         )
     }
@@ -138,12 +163,23 @@ export default function Dashboard() {
   return (
    <Layout>
      <div className={s.container}>
-       <HelloBanner
-       message={"Hello"}
-       username={username}
+      <div className={s.topbar}>
+      {loadingBanner ==false ?
+      <HelloBanner
+      message={"Welcome"}
+      username={username}/> 
+        :
+        <LoadingBanner/>
 
 
-       />
+      }
+      <div className={s.signoutcontainer}>
+        <button onClick={(e) => handleSignOut(e)} className={s.signout}>
+          Sign out
+        </button>
+      </div>
+      </div>
+       
        <div className={s.inputcontainer}>
         <TaskInput
         userID={userID}

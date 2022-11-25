@@ -1,3 +1,7 @@
 .container {
     @apply w-full h-full min-h-screen flex flex-col items-center;
 }
+
+.navcontainer {
+    @apply text-slate-500 underline;
+}

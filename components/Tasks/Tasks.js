@@ -1,5 +1,5 @@
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TaskContext } from "../../context/TasksContext";
 import { supabase } from "../../utils/supabaseClient";
@@ -8,6 +8,7 @@ import s from "./Tasks.module.css"
 
 export default function Tasks({tasks, setTasks}) {
     const {tasksToDelete, setTasksToDelete} = useContext(TaskContext)
+    const [buttonEnabled, setButtonEnabled] = useState(false);
     const notify = () => toast('Successfully deleted task(s)!')
     const notifyError = () => toast('Successfully deleted task(s)!')
    
@@ -48,6 +49,20 @@ export default function Tasks({tasks, setTasks}) {
         console.error(err.message)
     }
    }
+
+   //https://www.dofactory.com/html/button/disabled copied script tag, threw in useEffect with dependency
+
+   useEffect(()=>{
+    let element = document.getElementById('delete_button');
+    let disabled = element.getAttribute("disabled");
+    if(tasksToDelete.length >= 1){
+        element.removeAttribute("disabled");
+    } else{
+         element.setAttribute("disabled", "disabled");
+    }
+   },[tasksToDelete])
+
+
    if(!tasks){
     return<></>
    }
@@ -59,7 +74,7 @@ export default function Tasks({tasks, setTasks}) {
                 Tasks
             </span>
            <div className={s.buttoncontainer}>
-           <button onClick={(e)=>handleBatchDelete(e)} className={s.button}>
+           <button disabled id="delete_button" onClick={(e)=>handleBatchDelete(e)} className={s.button}>
                 {tasksToDelete.length >1 ? 'Delete Batch' : 'Delete Task'}
             </button>
            </div>

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout"
 import s from "../../styles/Login.module.css"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {  toast } from 'react-toastify';
+
 import { supabase } from "../../utils/supabaseClient"
 import {useRouter }from "next/router"
 export default function Login() {
@@ -25,14 +25,12 @@ export default function Login() {
             }
             const {data, error} =  await supabase
             .auth.signInWithPassword(inputs)
-            notify();
+            
             router.push('/dashboard')
-            if(data){
-                console.log(data)
-            }
+            notify();
 
             if(error){
-                console.log(error)
+       
                 notifyError()
             }
         } catch (err) {
@@ -48,11 +46,11 @@ export default function Login() {
         } = await supabase.auth.getSession()
     
         if (error) {
-          throw error
+      
         }
     
         if (!session?.user) {
-          throw new Error('User not logged in')
+      
         }
         if(session){
             router.push('/dashboard')
@@ -75,9 +73,7 @@ export default function Login() {
 
             console.log(data)
     
-          if (error && status !== 406) {
-            throw error
-          }
+         
     
           if (data) {
            
@@ -87,7 +83,7 @@ export default function Login() {
            
           }
         } catch (error) {
-          alert(error.message)
+          
         } finally {
           
           setLoading(false)
@@ -134,7 +130,7 @@ export default function Login() {
                 </div>
             </div>
         </div>
-        <ToastContainer/>
+   
     </Layout>
   )
 }

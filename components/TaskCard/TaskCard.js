@@ -16,18 +16,24 @@ export default function TaskCard({id, title, status}) {
         setToggledToDelete(false)
           setTasksToDelete(tasksToDelete.filter(item=> item !== id))
         }
-    const handleNavigateToTaskPage = () =>{
+    const handleNavigateToTaskPage = async(e) =>{
+     e.stopPropagation();
+      try {
         router.push(`/task/${id}`)
+      } catch (err) {
+        console.error(err.message)
+      }
+        
     }
   return (
-    <div className={s.card}>
-        <div className={s.statuscontainer}>
+    <div className={s.card} >
+        <div className={s.statuscontainer}onClickCapture={((e)=>handleNavigateToTaskPage(e))}>
             
             <span className={status == "incomplete" ? s.incomplete : status == "in progress"?  s.inprogress : s.complete }>
                 
             </span>
         </div>
-        <div onClickCapture={((e)=>handleNavigateToTaskPage(e))} className={s.primarycontainer}>
+        <div  className={s.primarycontainer} onClickCapture={((e)=>handleNavigateToTaskPage(e))}>
             <span className={s.title}>
                 {title}
             </span>

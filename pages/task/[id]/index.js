@@ -67,9 +67,8 @@ export default function TaskPage() {
 
 
        />
-       <Link href="/dashboard">
-        back
-       </Link>
+       
+       
         {loading ?
         <>fetching...</>
         : <TaskPageCard
@@ -78,6 +77,11 @@ export default function TaskPage() {
         status={status}
         id={id}
         />}
+        <div className={s.navcontainer}>
+       <Link href="/dashboard">
+        {`<= Dashboard`}
+       </Link>
+       </div>
     </div>
     </Layout>
   )

@@ -69,12 +69,12 @@ export default function TaskInput({userID}) {
                 placeholder="title"
                 />
             </div>
-            <div className={s.inputbox}>
-                <input
-                type="text"
+            <div className={s.largeinputbox}>
+                <textarea
+           
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className={s.input}
+                className={s.largeinput}
                 placeholder="description"
                 />
             </div>

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout"
 import s from "../../styles/Register.module.css"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 import { supabase } from "../../utils/supabaseClient";
 import { useRouter } from "next/router";
 export default function Register() {
@@ -115,7 +115,7 @@ export default function Register() {
                 </div>
             </div>
         </div>
-        <ToastContainer/>
+
     </Layout>
   )
 }

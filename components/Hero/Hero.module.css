@@ -11,9 +11,9 @@
  }
 
  .register{
-   @apply text-white font-semibold  border border-gray-700 p-2;
+   @apply text-white font-semibold  border border-zinc-700 p-2;
  }
 
  .login{
-   @apply text-white font-semibold border border-gray-700 p-2;
+   @apply text-white font-semibold border border-zinc-700 p-2;
  }

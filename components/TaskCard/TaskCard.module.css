@@ -1,5 +1,5 @@
 .card{
-    @apply w-full border border-gray-600 p-4 flex flex-row hover:bg-white hover:transform hover:bg-opacity-10 duration-200 hover:cursor-pointer;
+    @apply w-full bg-gray-600 bg-opacity-10 rounded shadow-sm p-4 flex flex-row hover:bg-gray-700 hover:transform  duration-200 hover:cursor-pointer;
     animation: fadeInAnimation ease 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;

@@ -1,0 +1,7 @@
+.topbar{
+    @apply w-[95%] rounded mt-4 bg-gray-300 bg-opacity-10 border space-x-4 border-zinc-700 px-2 flex text-slate-100 items-center justify-center text-6xl tracking-tighter font-semibold py-4;
+}
+
+.loading{
+    @apply font-thin bg-white bg-opacity-10 w-[40%] h-[90%] rounded-full animate-pulse ;
+}
