@@ -1,33 +1,21 @@
 import { useEffect, useState } from "react"
 import HelloBanner from "../../components/HelloBanner/HelloBanner"
 import Layout from "../../components/Layout/Layout"
+import TaskInput from "../../components/TaskInput/TaskInput"
 import Tasks from "../../components/Tasks/Tasks"
 import UsernameModal from "../../components/UsernameModal/UsernameModal"
 import s from "../../styles/Dashboard.module.css"
 import { supabase } from "../../utils/supabaseClient"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
     const [session, setSession] = useState(null)
     const [username, setUsername] = useState('')
- 
+    const [userID, setUserID] = useState(null)
     const [message, setMessage] = useState("Hello");
     const [tasks, setTasks] = useState([
-      {
-          id:1,
-          title: 'yo this a task',
-          status: 'incomplete'
-      },
-      {
-          id:2,
-          title: 'a started - but not done',
-          status: 'in progress'
-      },
-      {
-          id:3,
-          title: 'this is finished',
-          status: 'complete'
-      }
+     
   ]);
     const [modal, setModal] = useState(<></>);
 
@@ -66,10 +54,26 @@ export default function Dashboard() {
         subscription?.unsubscribe()
       }
     }, [])
-
+    async function getCurrentUser() {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession()
+  
+      if (error) {
+        throw error
+      }
+  
+      if (!session?.user) {
+        throw new Error('User not logged in')
+      }
+      setUserID(session.user.id)
+      return session.user
+    }
     async function getUsername(){
       try {
-       
+        const user = await getCurrentUser()
+        console.log(user)
         let{data, error, status} = await supabase
         .from('profiles')
         .select('username')
@@ -92,8 +96,28 @@ export default function Dashboard() {
       } 
     }
 
+    async function getTasksByUserId(){
+      try {
+        const {data, error} = await supabase
+        .from('tasks')
+        .select('id, title,text, status')
+        .eq('creator_id', session.user.id)
+        if(data){
+          console.log(data)
+          setTasks(data)
+        }
+        if(error){
+          console.log(error)
+        }
+
+      } catch (err) {
+        console.error(err.message)
+      }
+    }
+
     useEffect(()=>{
       getUsername()
+      getTasksByUserId()
     },[session])
 
 
@@ -121,13 +145,20 @@ export default function Dashboard() {
 
 
        />
+       <div className={s.inputcontainer}>
+        <TaskInput
+        userID={userID}
+        />
+       </div>
        <div className={s.todocontainer}>
             <Tasks
             tasks={tasks}
+            setTasks={setTasks}
             />
        </div>
        {modal}
     </div>
+    <ToastContainer/>
    </Layout>
   )
 }
