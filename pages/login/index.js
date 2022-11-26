@@ -104,6 +104,11 @@ export default function Login() {
                 </span>
             </div>
             <div className={s.form}>
+              <div className={s.inputlabelcontainer}>
+                <label className={s.inputlabel}>
+                  Email
+                </label>
+              </div>
                 <div className={s.inputbox}>
                     <input
                     type="text"
@@ -112,6 +117,11 @@ export default function Login() {
                     className={s.input}
                     />
                 </div>
+                <div className={s.inputlabelcontainer}>
+                <label className={s.inputlabel}>
+                  Password
+                </label>
+              </div>
                 <div  className={s.inputbox}>
                     <input
                     type="password"
@@ -120,14 +130,22 @@ export default function Login() {
                     className={s.input}
                     />
                 </div>
-                <div className={s.buttoncontainer}>
+                <div className={s.interactioncontainer}>
+                <Link  href="/register" className={s.signinbutton}>
+                        Sign up
+                    </Link>
+                                    <div className={s.buttoncontainer}>
                     <button onClick={(e) => handleLoginUser(e)} className={s.button}>
                         Submit
                     </button>
-                    <Link  href="/register" className={s.signinbutton}>
-                        Sign up
-                    </Link>
+                   
                 </div>
+                </div>
+
+            </div>
+            <div className={s.newcontainer}>
+             
+            
             </div>
         </div>
    

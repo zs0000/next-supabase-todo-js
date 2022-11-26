@@ -4,10 +4,11 @@ import { supabase } from '../utils/supabaseClient'
 
 
 const createTask = async (task)=>{
-    console.log(task)
+    
     const{data,error} = await supabase
     .from('tasks')
     .insert(task)
+    .select()
     
     if(error){
         throw error
@@ -16,10 +17,13 @@ const createTask = async (task)=>{
 }
 
 export default function useCreateTask(task){
+    const queryClient = useQueryClient()
     return useMutation(()=> createTask(task), {
         onSuccess: async(data) =>{
+            queryClient.refetchQueries('tasks')
            console.log(data)
+           return data
         }
     })
-    return data
+
 }

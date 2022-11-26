@@ -32,3 +32,29 @@
   .login{
     @apply text-white font-semibold border border-zinc-700 p-2;
   }
+
+
+
+
+@screen sm {
+
+}
+
+@screen md {
+
+    
+}
+
+@screen lg {
+   
+}
+
+@screen xl {
+    .container {
+        width:50%
+    }
+}
+
+@screen 2xl {
+
+}

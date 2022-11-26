@@ -5,3 +5,35 @@
 .navcontainer {
     @apply text-slate-500 underline;
 }
+
+.loadingcontainer{
+    @apply text-white h-[150px] p-4 pb-6 my-4;
+}
+
+.loadingicon{
+    @apply w-[25px] h-[25px] animate-spin mt-8;
+}
+
+
+@screen sm {
+
+}
+
+@screen md {
+
+    
+}
+
+@screen lg {
+   
+}
+
+@screen xl {
+    .container {
+        width:50%
+    }
+}
+
+@screen 2xl {
+
+}

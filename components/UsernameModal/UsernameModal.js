@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { useState } from "react"
 import { supabase } from "../../utils/supabaseClient"
 import s from "./UsernameModal.module.css"
@@ -5,6 +6,8 @@ import s from "./UsernameModal.module.css"
 export default function UsernameModal({closeModal,session}) {
     const [loading, setLodaing] = useState(false)
     const [username, setUsername] = useState('')
+
+    const router = useRouter()
 
     const handleSubmitUsername =  async(e) =>{
         e.preventDefault()
@@ -18,6 +21,7 @@ export default function UsernameModal({closeModal,session}) {
             .from('profiles')
             .insert(inputs)
             closeModal();
+            router.push('/dashboard')
 
             if(error){
                 console.log(error)

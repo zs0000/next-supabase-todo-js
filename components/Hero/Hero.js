@@ -24,9 +24,10 @@ export default function Hero({session}) {
   if(session){
     return(
       <div className={s.container}>
-        <h1 className={s.title}>
-        Welcome back!
-        </h1>
+    
+        <span className={s.title}>
+         use createTask
+        </span>
         <div className={s.links}>
             <Link href="/dashboard" className={s.register}>
                 Dashboard
@@ -42,7 +43,7 @@ export default function Hero({session}) {
   return (
     <div className={s.container}>
         <h1 className={s.title}>
-        Welcome
+        new Task
         </h1>
         <div className={s.links}>
             <Link href="/register" className={s.register}>

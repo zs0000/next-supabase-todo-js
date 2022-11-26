@@ -6,6 +6,7 @@ import Layout from '../../../components/Layout/Layout'
 import TaskPageCard from '../../../components/TaskPageCard/TaskPageCard'
 import s from "../../../styles/TaskPage.module.css"
 import { supabase } from '../../../utils/supabaseClient'
+import {AiOutlineLoading3Quarters} from "react-icons/ai"
 
 export default function TaskPage() {
     const router = useRouter()
@@ -53,11 +54,13 @@ export default function TaskPage() {
         }
     }
 
-    
+
+
 
     useEffect(()=>{
         getTaskDetails()
     },[id])
+    
   return (
     <Layout>
         <div className={s.container}>
@@ -70,7 +73,10 @@ export default function TaskPage() {
        
        
         {loading ?
-        <>fetching...</>
+        <div className={s.loadingcontainer}>  
+            <AiOutlineLoading3Quarters className={s.loadingicon}/>
+
+    </div>
         : <TaskPageCard
         title={title}
         text={text}

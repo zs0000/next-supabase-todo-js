@@ -11,7 +11,7 @@
 }
 
 .input {
-    @apply h-full w-full bg-gray-600 bg-opacity-10 hover:bg-gray-700 outline-none rounded-lg p-2;
+    @apply h-full w-full text-white bg-gray-600 bg-opacity-10 hover:bg-gray-700 outline-none rounded-lg p-2;
 }
 .largeinputbox {
     @apply w-full h-[100px];
@@ -19,7 +19,7 @@
 }
 
 .largeinput {
-    @apply h-full w-full bg-gray-600 bg-opacity-10 resize-none hover:bg-gray-700 outline-none rounded-lg p-2;
+    @apply h-full w-full  text-white bg-gray-600 bg-opacity-10 resize-none hover:bg-gray-700 outline-none rounded-lg p-2;
     scrollbar-width: none;
 }
 .selectinput {

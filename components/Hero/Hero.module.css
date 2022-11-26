@@ -1,13 +1,13 @@
 .container{
-    @apply h-full flex flex-col items-center p-4 ;
+    @apply h-full flex flex-col mx-2 -mt-4;
  }
 
  .title{
-    @apply text-white font-bold text-7xl mb-4; 
+    @apply text-white tracking-tight font-bold md:text-7xl mb-4 text-4xl; 
  }
 
  .links{
-   @apply w-full flex justify-evenly ;
+   @apply w-full text-xs sm:text-sm md:text-base flex justify-evenly space-x-1 ;
  }
 
  .register{

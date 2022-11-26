@@ -89,6 +89,11 @@ export default function Register() {
                 </span>
             </div>
             <div className={s.form}>
+            <div className={s.inputlabelcontainer}>
+                <label className={s.inputlabel}>
+                  Email
+                </label>
+              </div>
                 <div className={s.inputbox}>
                     <input
                     type="text"
@@ -97,6 +102,11 @@ export default function Register() {
                     className={s.input}
                     />
                 </div>
+                <div className={s.inputlabelcontainer}>
+                <label className={s.inputlabel}>
+                  Password
+                </label>
+              </div>
                 <div className={s.inputbox}>
                     <input
                     type="password"
@@ -105,15 +115,23 @@ export default function Register() {
                     className={s.input}
                     />
                 </div>
-                <div className={s.buttoncontainer}>
+                <div className={s.interactioncontainer}>
+                <Link href="/login" className={s.signinbutton}>
+                        Sign in
+                    </Link>
+                    <div className={s.buttoncontainer}>
                     <button onClick={(e) => handleRegisterUser(e)} className={s.button}>
                         Submit
                     </button>
-                    <Link href="/login" className={s.signinbutton}>
-                        Sign in
-                    </Link>
+                    
                 </div>
+                </div>
+               
             </div>
+            <div className={s.newcontainer}>
+             
+            
+             </div>
         </div>
 
     </Layout>

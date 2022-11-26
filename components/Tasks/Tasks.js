@@ -1,22 +1,29 @@
 
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { TaskContext } from "../../context/TasksContext";
+import useTasks from "../../hooks/useTasks";
 import { supabase } from "../../utils/supabaseClient";
 import TaskCard from "../TaskCard/TaskCard";
 import s from "./Tasks.module.css"
 
-export default function Tasks({tasks, setTasks}) {
+export default function Tasks({session}) {
+    const router = useRouter()
     const {tasksToDelete, setTasksToDelete} = useContext(TaskContext)
     const [buttonEnabled, setButtonEnabled] = useState(false);
     const notify = () => toast('Successfully deleted task(s)!')
     const notifyError = () => toast('Successfully deleted task(s)!')
-   
+    const { data, isLoading, isError } = useTasks(session.user.id)
+    console.log(data)
    const tempArr = [];
+   const tempIdArr = [];
    const constructBatchDeleteRequests = async() =>{
     try {
         for(const atask of tasksToDelete){
             let holder = `'id', ${atask} ,`;
+            let holdId = atask;
+            tempIdArr.push(holdId);
             tempArr.push(holder);
         }
     } catch (err) {
@@ -37,7 +44,8 @@ export default function Tasks({tasks, setTasks}) {
         .delete()
         .eq('id', atask)
         notify()
-        setTasks(tasks.filter(task => task.id !== atask))
+        
+       
 
 
         if(error){
@@ -47,24 +55,33 @@ export default function Tasks({tasks, setTasks}) {
        }
     } catch (err) {
         console.error(err.message)
+    } finally{
+        window.location.reload()
     }
    }
 
    //https://www.dofactory.com/html/button/disabled copied script tag, threw in useEffect with dependency
 
    useEffect(()=>{
-    let element = document.getElementById('delete_button');
-    let disabled = element.getAttribute("disabled");
-    if(tasksToDelete.length >= 1){
-        element.removeAttribute("disabled");
+    if(isLoading){
+
     } else{
-         element.setAttribute("disabled", "disabled");
+        let element = document.getElementById('delete_button');
+        let disabled = element.getAttribute("disabled");
+        
+        if(tasksToDelete.length >= 1){
+            element.removeAttribute("disabled");
+        } else{
+             element.setAttribute("disabled", "disabled");
+        }
     }
-   },[tasksToDelete])
+   
+   },[isLoading,tasksToDelete])
 
 
-   if(!tasks){
-    return<></>
+   if(isLoading){
+    return<>
+    </>
    }
    
   return (
@@ -74,19 +91,19 @@ export default function Tasks({tasks, setTasks}) {
                 Tasks
             </span>
            <div className={s.buttoncontainer}>
-           <button disabled id="delete_button" onClick={(e)=>handleBatchDelete(e)} className={s.button}>
+           <button  id="delete_button" onClick={(e)=>handleBatchDelete(e)} className={s.button}>
                 {tasksToDelete.length >1 ? 'Delete Batch' : 'Delete Task'}
             </button>
            </div>
         </div>
         <div className={s.taskscontainer}>
-        {tasks.map((task)=>(
+        {isLoading == false ? data.map((task)=>(
             <TaskCard
             id={task.id}
             key={task.id}
             title={task.title}
             status={task.status} />
-        ))}
+        )) : <></>}
         </div>
     </div>
   )

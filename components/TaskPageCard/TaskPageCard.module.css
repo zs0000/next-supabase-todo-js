@@ -1,26 +1,30 @@
 .card{
-    @apply w-[95%] bg-white bg-opacity-10 my-4 rounded border border-gray-600 p-4 flex flex-row ;
+    @apply w-[95%] min-h-[150px] bg-white bg-opacity-10 my-4 rounded border border-gray-600 p-4 pb-6 flex flex-row ;
     animation: fadeInAnimation ease 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
 
 .statuscontainer {
-    @apply w-[10%] mr-2 flex flex-row space-x-1 items-center text-xs text-slate-400;
+    @apply w-[10%] mr-8 flex flex-row space-x-1 items-center text-xs text-slate-400;
 }
 
 .primarycontainer{
-    @apply w-full h-full;
+    @apply w-full h-full ;
+}
+
+.topcontainer{
+    @apply flex flex-row pl-4;
 }
 
 .title{
     @apply font-bold tracking-tighter text-3xl text-white py-2;
 }
 .textcontainer{
-    @apply pt-2;
+    @apply pt-2 px-4;
 }
 .tasktext{
-    @apply text-gray-200 tracking-tight mx-2;
+    @apply text-gray-200 tracking-tight;
 }
 
 .incomplete{
@@ -61,7 +65,7 @@
 }
 
 .titlecontainer{
-    @apply flex flex-row items-center space-x-2;
+    @apply flex flex-row items-center pl-2 w-[90%];
 }
 
 .statuscontainer{

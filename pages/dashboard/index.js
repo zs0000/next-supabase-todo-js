@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TaskContext } from "../../context/TasksContext"
 import LoadingBanner from "../../components/LoadingBanner/LoadingBanner"
 import Link from "next/link"
+import useTasks from "../../hooks/useTasks"
 export default function Dashboard() {
     const [isLoading, setIsLoading] = useState(true)
     const [loadingBanner, setLoadingBanner] = useState(true)
@@ -26,6 +27,9 @@ export default function Dashboard() {
     
     const closeModal = () => setModal(<></>);
     const openModal = () => setModal(<UsernameModal closeModal={closeModal} session={session} />);
+    
+   
+    
     const handleSignOut = async(e) => {
       e.preventDefault()
       try {
@@ -113,10 +117,11 @@ export default function Dashboard() {
 
     async function getTasksByUserId(){
       try {
-        const {data, error} = await supabase
-        .from('tasks')
-        .select('id, title,text, status')
-        .eq('creator_id', session.user.id)
+        //const {data, error} = await supabase
+        //.from('tasks')
+        //.select('id, title,text, status')
+        //.eq('creator_id', session.user.id)
+
         if(data){
           console.log(data)
           setTasks(data)
@@ -187,6 +192,7 @@ export default function Dashboard() {
        </div>
        <div className={s.todocontainer}>
             <Tasks
+            session={session}
             tasks={tasks}
             setTasks={setTasks}
             />

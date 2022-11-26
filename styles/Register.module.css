@@ -3,7 +3,7 @@
 }
 
 .form{
-    @apply w-[80%] p-4 flex flex-col items-center justify-center space-y-2;
+    @apply w-full max-w-[420px]  p-4 flex flex-col items-center justify-center space-y-2 border-r border-l border-zinc-600 py-10;
 }
 
 .inputbox {
@@ -11,17 +11,59 @@
 }
 
 .input {
-    @apply h-full bg-gray-600 hover:bg-gray-100 outline-none rounded-lg p-2;
+    @apply h-full bg-gray-600 hover:bg-gray-100 outline-none rounded-lg p-2 w-[80%];
 }
 
 .buttoncontainer{
-    @apply w-full flex flex-col items-center justify-center space-y-2;
+    @apply w-full flex flex-col items-end space-y-2;
 }
 .button{
-    @apply p-2 px-4 rounded-lg text-center bg-slate-200 hover:bg-slate-600 hover:transform duration-300 hover:text-slate-200;
+    @apply p-2 px-4 rounded-lg text-center bg-slate-700 text-slate-400 hover:bg-slate-800 hover:transform duration-300 hover:text-slate-200;
 }
 
 .signinbutton{
-    @apply p-2 px-4 rounded-lg text-center bg-indigo-400 hover:bg-indigo-700 hover:transform duration-300 text-slate-100 hover:text-slate-200;
+    @apply text-sky-800 tracking-tighter underline text-sm w-[20%]  pt-2;
 }
 
+.registercontainer{
+    @apply w-full max-w-[420px] text-center border border-zinc-600 rounded-t py-10;
+}
+.label{
+    @apply tracking-tight uppercase font-extrabold text-transparent  bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400;
+    background-size: 400% 400%;
+    animation: gradient 7s infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+.newlabel{
+    @apply text-xs  font-light tracking-tighter;
+}
+
+.newcontainer{
+    @apply flex flex-col items-center w-full max-w-[420px] py-2 rounded-b border border-zinc-600 ;
+}
+
+.interactioncontainer {
+    @apply flex flex-row w-full max-w-[310px] pt-10;
+}
+
+.inputlabelcontainer {
+    @apply w-full leading-none pt-1;
+}
+
+.inputlabel{
+    @apply text-sm tracking-tight leading-none text-zinc-400;
+    padding-left: 2.5rem;
+}

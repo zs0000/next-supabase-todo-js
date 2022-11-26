@@ -9,6 +9,7 @@ export default function TaskInput({userID}) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('')
     const [status, setStatus] = useState('Status');
+    const [posted, setPosted] = useState(false); 
     const {tasks, setTasks} = useContext(TaskContext)
     const current = new Date();
     const notifyCreatedTask = () => toast('Task created successfully')
@@ -20,6 +21,7 @@ export default function TaskInput({userID}) {
         status:status
     })
 
+    
 
 
     const handleCreateTask = async(e) =>{
@@ -54,6 +56,11 @@ export default function TaskInput({userID}) {
         } catch (err) {
             console.error(err.message)       
         }
+    }
+
+    if(!userID){
+        <>
+        </>
     }
 
 
@@ -91,14 +98,10 @@ export default function TaskInput({userID}) {
             </div>
             <div className={s.buttoncontainer}>
                 <button className={s.button} onClick={()=> {createTaskMutation.mutate()
-                setTasks([...tasks, { 
-                    title: title,
-                    text:description,
-                    status:status}])
-                    notifyCreatedTask()
-                    setTitle("")
-                    setDescription("")
-                    setStatus("")
+                setTitle('')
+                setDescription('')
+                setStatus('')
+                
                     }}>
                     Submit
                 </button>
