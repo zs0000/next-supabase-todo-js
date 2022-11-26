@@ -36,7 +36,7 @@ export default function UsernameModal({closeModal,session}) {
         <div className={s.form}>
             <div className={s.labelcontainer}>
                 <span className={s.label}>
-                    It looks like you don't have a username! Please set one to start creating tasks
+                    {`It looks like you don't have a username! Please set one to start creating tasks`}
                 </span>
             </div>
             <div className={s.inputbox}>
