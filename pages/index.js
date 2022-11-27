@@ -50,11 +50,14 @@ export default function Home() {
 
   return (
     <Layout>
-      <Head>
-        <title>
-           Home
-        </title>
-      </Head>
+       <Head>
+      <title>new Task: Task list</title>
+      <meta name="description" content="A light weight, modern task list. Data persistince and User authentication. Built using serverless technologies Next.js and Supabase."/>
+      <link rel="icon" href="https://res.cloudinary.com/repdb/image/upload/v1634675008/testesst.jpg"/>
+      
+      <meta property="og:image" content="https://res.cloudinary.com/repdb/image/upload/v1669583289/7b64f15e868e1e2e68422a248a045f36.png"></meta>
+      
+    </Head>
       
       <div className={s.leftcontainer}>
       <HomeCssAnimation/>
