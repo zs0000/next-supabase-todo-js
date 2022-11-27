@@ -8,6 +8,7 @@ import { supabase } from '../utils/supabaseClient'
 import Layout from '../components/Layout/Layout'
 import Hero from '../components/Hero/Hero'
 import HomeLottie from '../components/HomeLottie/HomeLottie'
+import HomeCssAnimation from '../components/HomeCssAnimation/HomeCssAnimation'
 
 export default function Home() {
   const [session, setSession] = useState(null)
@@ -54,7 +55,10 @@ export default function Home() {
            Home
         </title>
       </Head>
-      <HomeLottie/>
+      
+      <div className={s.leftcontainer}>
+      <HomeCssAnimation/>
+      </div>
       {isLoading == false ? <Hero session={session}/> : <></>}
     </Layout>
   )

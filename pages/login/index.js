@@ -30,7 +30,7 @@ export default function Login() {
             notify();
 
             if(error){
-       
+       console.log(error)
                 notifyError()
             }
         } catch (err) {
